@@ -1,0 +1,29 @@
+name: DevSecOps Pipeline
+
+on:
+  push:
+
+jobs:
+  security-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install tools
+        run: |
+          pip install bandit safety
+
+      - name: Run Bandit
+        run: |
+          bandit -r .
+
+      - name: Run Safety
+        run: |
+          safety scan
