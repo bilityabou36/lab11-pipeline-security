@@ -18,12 +18,13 @@ jobs:
 
       - name: Install tools
         run: |
-          pip install bandit safety
+          python -m pip install --upgrade pip
+          pip install bandit safety==2.3.5
 
       - name: Run Bandit
         run: |
           bandit -r .
-          - name: Run Safety
-          run: |
-          pip install safety==2.3.5
+
+      - name: Run Safety
+        run: |
           safety check --full-report || true
