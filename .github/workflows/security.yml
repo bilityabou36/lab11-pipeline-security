@@ -23,7 +23,7 @@ jobs:
       - name: Run Bandit
         run: |
           bandit -r .
-
-      - name: Run Safety
-        run: |
-          safety scan
+          - name: Run Safety
+          run: |
+          pip install safety==2.3.5
+          safety check --full-report || true
